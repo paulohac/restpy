@@ -3,21 +3,19 @@ version: '3'
 services:
   postgres:
     image: postgres
+    hostname: postgres
     ports:
       - '5432:5432'
-    environment:
-      - PG_HOST = postgres
-      - PG_PORT = 5432
-      - PG_DATABASE = prezis
-      - PG_USER = postgres
-      - PG_PASSWORD = postgres    
   api:
     build: .
-    volumes:
-      - .:/code
     ports:
       - "5000:5000"
     environment:
       WAIT_HOSTS: postgres:5432
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_DATABASE: prezis
+      PG_USER: postgres
+      PG_PASSWORD: postgres
     links:
       - postgres
