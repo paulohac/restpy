@@ -106,7 +106,7 @@ class PreziIndex(Resource):
             sql_query += " WHERE title ILIKE %s"
             sql_params.append('%'+ args['title'] + '%')
 
-        sql_query  += ' ORDER BY id ASC OFFSET %s LIMIT %s'
+        sql_query  += ' ORDER BY created_at DESC OFFSET %s LIMIT %s'
         sql_params.append((args['page']-1) * PAGE_SIZE)
         sql_params.append(PAGE_SIZE)
 
