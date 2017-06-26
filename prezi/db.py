@@ -45,7 +45,7 @@ def seed():
             for row in seed_data:
                 cur.execute('INSERT INTO prezis (id, title, picture, created_at, creator_id, creator_name) VALUES (%s, %s, %s, %s, %s, %s)',
                                 (row['id'], row['title'], row['picture'],
-                                 datetime.strptime(row['createdAt'], '%a %b %d %Y %H:%M:%S GMT%z (%Z)'),
+                                 datetime.strptime(row['createdAt'], '%a %b %d %Y %H:%M:%S %Z%z'),
                                  row['creator']['id'], row['creator']['name']))
 
 
