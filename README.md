@@ -1,4 +1,3 @@
-# Prezi Home Assignment
 # Web API for Prezis
 
 * [Guidelines](#guidelines)
