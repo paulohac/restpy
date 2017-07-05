@@ -11,10 +11,16 @@ Vagrant.configure("2") do |config|
      vb.memory = "2048"
    end
    config.vm.provision "shell", inline: <<-SHELL
-     sudo apt-get -y update
-     sudo apt-get -y upgrade
-     sudo apt-get -y install python3-pip
-     sudo apt-get -y install build-essential libssl-dev libffi-dev python-dev
-     sudo apt-get -y install python-virtualenv
-   SHELL
+   sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+   sudo apt-key fingerprint 0EBFCD88
+   sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+   sudo apt-get -y update
+   sudo apt-get -y install docker-ce
+   curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/docker-compose
+   sudo docker-compose -f /vagrant/docker-compose.yml up --build -d
+  SHELL
 end
